@@ -22,9 +22,14 @@ html {
 
 #header li {
     display: table-cell;
+    cursor:pointer;
     color: ghostwhite;
     font-size: 24px;
     font-weight: 100;
+}
+
+#header li:hover {
+    background-color: #383838;
 }
 
 body {
