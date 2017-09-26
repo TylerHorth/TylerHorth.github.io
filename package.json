@@ -1,0 +1,11 @@
+{
+  "name": "my-website",
+  "version": "2.0.1",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.0.0",
+    "babel-preset-env": "^1.6.0"
+  }
+}
