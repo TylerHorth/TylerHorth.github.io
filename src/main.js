@@ -1,4 +1,3 @@
-// To add to window
 if (!window.Promise) {
     window.Promise = Promise;
 }
