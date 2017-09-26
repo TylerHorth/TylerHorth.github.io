@@ -27,7 +27,7 @@ function findImage(timeout, nextUrl) {
     }).catch((err) => {
         console.log(`err: ${err}`)
         console.log(`retrying...`)
-        if (err == 'maximum timouts reached') {
+        if (err == 'maximum retrys') {
             setUrl(nextUrl())
         } else {
             return findImage(timeout, nextUrl)
@@ -57,7 +57,7 @@ fetch("https://www.reddit.com/r/EarthPorn/.json")
         let timeout = () => { 
             return new Promise((resolve, reject) => {
                 if (trys > 5) {
-                    reject('maximum timouts reached')
+                    reject('maximum retrys')
                 } else {
                     setTimeout(reject, 300 * trys, 'request timed out');
                 }
