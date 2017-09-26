@@ -1,3 +1,8 @@
+// To add to window
+if (!window.Promise) {
+  window.Promise = Promise;
+}
+
 function fetchImage(url) {
     return new Promise((resolve, reject) => {
         if (!url.match(/\.(jpg|png)$/)) {

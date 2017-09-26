@@ -2,10 +2,18 @@
   "name": "my-website",
   "version": "2.0.1",
   "scripts": {
-    "build": "babel src -d lib"
+    "build": "webpack -p --config webpack.config.js"
   },
   "devDependencies": {
     "babel-cli": "^6.0.0",
-    "babel-preset-env": "^1.6.0"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "whatwg-fetch": "^2.0.3"
   }
 }
