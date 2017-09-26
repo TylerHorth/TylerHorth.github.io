@@ -2,15 +2,19 @@ if (!window.Promise) {
     window.Promise = Promise;
 }
 
+function setUrl(url) {
+    for (let elem of document.getElementsByClassName("bg")) {
+        elem.style.backgroundImage = `url('${url}')`
+    }
+}
+
 function fetchImage(url) {
     return new Promise((resolve, reject) => {
         if (!url.match(/\.(jpg|png)$/)) {
             reject(url);
         } else {
             fetch(url, { mode: 'no-cors' }).then((resp) => {
-                for (let elem of document.getElementsByClassName("bg")) {
-                    elem.style.backgroundImage = `url('${url}')`
-                }
+                setUrl(url)
                 resolve(url)
             }).catch(reject)
         }
@@ -23,7 +27,11 @@ function findImage(timeout, nextUrl) {
     }).catch((err) => {
         console.log(`err: ${err}`)
         console.log(`retrying...`)
-        return findImage(timeout, nextUrl)
+        if (err == 'maximum timouts reached') {
+            setUrl(nextUrl())
+        } else {
+            return findImage(timeout, nextUrl)
+        }
     })
 }
 
@@ -48,7 +56,11 @@ fetch("https://www.reddit.com/r/EarthPorn/.json")
         }
         let timeout = () => { 
             return new Promise((resolve, reject) => {
-              setTimeout(reject, 300 * trys, 'request timed out');
+                if (trys > 5) {
+                    reject('maximum timouts reached')
+                } else {
+                    setTimeout(reject, 300 * trys, 'request timed out');
+                }
             })
         }
         findImage(timeout, nextUrl)
